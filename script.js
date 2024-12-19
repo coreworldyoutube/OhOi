@@ -1,5 +1,6 @@
+// 検索機能のスクリプト
 document.getElementById('search-button').addEventListener('click', () => {
-  const query = document.getElementById('search-box').value.trim();
+  const query = document.getElementById('search-box').value.trim().toLowerCase();
   const resultsDiv = document.getElementById('results');
   resultsDiv.innerHTML = ''; // 検索結果をリセット
 
@@ -8,27 +9,37 @@ document.getElementById('search-button').addEventListener('click', () => {
     return;
   }
 
-  // サンプル検索データ
-  const data = [
-    { title: 'GitHub', url: 'https://github.com' },
-    { title: 'Google', url: 'https://www.google.com' },
-    { title: 'MDN Web Docs', url: 'https://developer.mozilla.org/' },
-  ];
+  // JSONデータをフェッチ
+  fetch('data.json')
+    .then(response => response.json())
+    .then(data => {
+      // クエリに一致する結果をフィルタリング
+      const results = data.filter(item =>
+        item.title.toLowerCase().includes(query) || 
+        item.description.toLowerCase().includes(query)
+      );
 
-  // 検索フィルタリング
-  const results = data.filter(item => item.title.toLowerCase().includes(query.toLowerCase()));
+      if (results.length === 0) {
+        resultsDiv.innerHTML = '<p>No results found.</p>';
+      } else {
+        results.forEach(result => {
+          const link = document.createElement('a');
+          link.href = result.url;
+          link.target = '_blank';
+          link.textContent = result.title;
 
-  if (results.length === 0) {
-    resultsDiv.innerHTML = '<p>No results found.</p>';
-  } else {
-    results.forEach(result => {
-      const link = document.createElement('a');
-      link.href = result.url;
-      link.target = '_blank';
-      link.textContent = result.title;
-      const div = document.createElement('div');
-      div.appendChild(link);
-      resultsDiv.appendChild(div);
+          const description = document.createElement('p');
+          description.textContent = result.description;
+
+          const div = document.createElement('div');
+          div.appendChild(link);
+          div.appendChild(description);
+          resultsDiv.appendChild(div);
+        });
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+      resultsDiv.innerHTML = '<p>Error loading search data.</p>';
     });
-  }
 });
