@@ -1,6 +1,6 @@
 [
   
-  { "title": "help", "url": "https://github.com/coreworldyoutube/OhOi/blob/main/data.json", "description": "私は知らないことを知っている(？)" },
+  { "title": "help", "url": "https://github.com/coreworldyoutube/OhOi/blob/main/data.json", "description": "私は知らないことを知っている(？)ここはデータが記載されています。" },
   { "title": "GitHub", "url": "https://github.com", "description": "A platform for hosting and collaborating on code." },
   { "title": "Google", "url": "https://www.google.com", "description": "The most popular search engine." },
   { "title": "MDN Web Docs", "url": "https://developer.mozilla.org/", "description": "Documentation for web developers." },
