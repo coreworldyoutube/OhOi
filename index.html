@@ -3,19 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Search</title>
+  <title>Enhanced Web Search</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>Web Search</h1>
+    <h1>Enhanced Web Search</h1>
     <input type="text" id="search-box" placeholder="Search..." />
     <button id="search-button">Search</button>
 
-    <p><strong>Help:</strong> Type "help" to view a list of available search results.</p> <!-- ヘルプメッセージを追加 -->
+    <!-- タブの作成 -->
+    <div id="tabs">
+      <button class="tab" id="tab-images">Images</button>
+      <button class="tab" id="tab-videos">Videos</button>
+      <button class="tab" id="tab-news">News</button>
+    </div>
 
+    <!-- 検索結果 -->
     <div id="results"></div>
   </div>
+  
   <script src="script.js"></script>
 </body>
 </html>
