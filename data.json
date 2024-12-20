@@ -1,6 +1,13 @@
 [
   { "title": "included", "url": "https://coreworldyoutube.github.io/TESTWEB3D/", "description": "テストで作った" },
   { "title": "NONE", "url": "＃", "description": "NONE" },
+  { "title": "scratch", "url": "https://scratch.mit.edu", "description": "初心者ができるプログラミングサイト" },
+  { "title": "Discord-login", "url": "https://discord.com/login", "description": "NONE" },
+  { "title": "Discord", "url": "https://discord.com", "description": "NONE" },
+  { "title": "Pixiv", "url": "https://www.pixiv.net", "description": "NONE" },
+  { "title": "Youtube", "url": "https://www.youtube.com", "description": "NONE" },
+  { "title": "Yandex", "url": "https://yandex.com", "description": "NONE" },
+  { "title": "WIKI-JP", "url": "https://ja.wikipedia.org/wiki/メインページ", "description": "NONE" },
   { "title": "help", "url": "https://github.com/coreworldyoutube/OhOi/blob/main/data.json", "description": "私は知らないことを知っている(？)ここはデータが記載されています。" },
   { "title": "GitHub", "url": "https://github.com", "description": "A platform for hosting and collaborating on code." },
   { "title": "Google", "url": "https://www.google.com", "description": "The most popular search engine." },
