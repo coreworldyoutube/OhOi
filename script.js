@@ -26,6 +26,9 @@ document.getElementById('search-button').addEventListener('click', () => {
         const resultsToShow = results.slice(0, maxResults); // 最大件数までの結果を取得
 
         resultsToShow.forEach(result => {
+          const div = document.createElement('div');
+          div.classList.add('result-item');
+
           const link = document.createElement('a');
           link.href = result.url;
           link.target = '_blank';
@@ -33,18 +36,6 @@ document.getElementById('search-button').addEventListener('click', () => {
 
           const description = document.createElement('p');
           description.textContent = result.description;
-
-          const div = document.createElement('div');
-
-          // 画像URLがある場合、その画像を表示
-          if (result.image) {
-            const img = document.createElement('img');
-            img.src = result.image;
-            img.alt = result.title;
-            img.style.width = '150px'; // 画像のサイズ調整
-            img.style.height = '150px';
-            div.appendChild(img);
-          }
 
           div.appendChild(link);
           div.appendChild(description);
@@ -54,11 +45,15 @@ document.getElementById('search-button').addEventListener('click', () => {
         // 検索結果が10件を超える場合に「もっと見る」ボタンを追加
         if (results.length > maxResults) {
           const seeMore = document.createElement('button');
+          seeMore.id = 'see-more';
           seeMore.textContent = 'See more results';
           seeMore.addEventListener('click', () => {
             // 「もっと見る」ボタンがクリックされた場合の処理
             resultsDiv.innerHTML = ''; // 結果をリセット
             results.forEach(result => {
+              const div = document.createElement('div');
+              div.classList.add('result-item');
+
               const link = document.createElement('a');
               link.href = result.url;
               link.target = '_blank';
@@ -66,18 +61,6 @@ document.getElementById('search-button').addEventListener('click', () => {
 
               const description = document.createElement('p');
               description.textContent = result.description;
-
-              const div = document.createElement('div');
-
-              // 画像URLがある場合、その画像を表示
-              if (result.image) {
-                const img = document.createElement('img');
-                img.src = result.image;
-                img.alt = result.title;
-                img.style.width = '150px';
-                img.style.height = '150px';
-                div.appendChild(img);
-              }
 
               div.appendChild(link);
               div.appendChild(description);
