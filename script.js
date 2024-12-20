@@ -38,13 +38,15 @@
       }
 
       // Scratch プロジェクトの埋め込みコード生成
+      // Scratch プロジェクトの埋め込みコード生成
       else if (url.match(/https:\/\/scratch\.mit\.edu\/projects\/(\d+)/)) {
         const projectId = url.match(/https:\/\/scratch\.mit\.edu\/projects\/(\d+)/)[1];
         embedCode = `
-          <iframe src="https://scratch.mit.edu/projects/${projectId}/embed" width="485" height="402" frameborder="0" 
-                  scrolling="no" allowtransparency="true" allowfullscreen></iframe>
+        <iframe src="https://scratch.mit.edu/projects/${projectId}/embed" width="485" height="402" frameborder="0" 
+        scrolling="no" allowtransparency="true" allowfullscreen></iframe>
         `;
       }
+
 
       // Vimeo の埋め込みコード生成
       else if (url.match(/https:\/\/vimeo\.com\/(\d+)/)) {
