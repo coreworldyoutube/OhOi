@@ -16,7 +16,7 @@ document.getElementById('search-button').addEventListener('click', () => {
       const results = data.filter(item =>
         (item.title.toLowerCase().includes(query) || 
         item.description.toLowerCase().includes(query)) && 
-        item.url !== '#' && item.url !== 'NONE' // NONE や # の場合は結果に含めない
+        item.url !== '#NONE' && item.url !== 'NONE' // NONE や # の場合は結果に含めない
       );
 
       if (results.length === 0) {
