@@ -23,6 +23,11 @@ document.getElementById('search-button').addEventListener('click', () => {
         resultsDiv.innerHTML = '<p>No results found.</p>'; // ヒットがない場合の処理
       } else {
         results.forEach(result => {
+          // URLが無効な場合はスキップする
+          if (result.url === '#' || result.url === '' || !result.url) {
+            return; // 無効なリンクを無視
+          }
+
           // リンク要素を作成
           const link = document.createElement('a');
           link.href = result.url;
