@@ -8,83 +8,88 @@ document.getElementById('search-button').addEventListener('click', () => {
     return;
   }
 
-  // スクラッチプロジェクトのURLチェック
-  const scratchUrlRegex = /https:\/\/scratch\.mit\.edu\/projects\/(\d+)/;
-  const match = query.match(scratchUrlRegex);
+  // JSONデータをフェッチ
+  fetch('data.json')
+    .then(response => response.json())
+    .then(data => {
+      // クエリに一致する結果をフィルタリング
+      const results = data.filter(item =>
+        (item.title.toLowerCase().includes(query) || 
+         item.description.toLowerCase().includes(query)) && 
+        item.url !== '#NONE' && item.url !== 'NONE' // NONE や # の場合は結果に含めない
+      );
 
-  if (match) {
-    // スクラッチURLの場合、埋め込みコードを生成
-    const projectId = match[1]; // プロジェクトIDを取得
-    const iframeCode = `<iframe src="https://scratch.mit.edu/projects/${projectId}/embed" width="485" height="402" frameborder="0" allowfullscreen></iframe>`;
+      if (results.length === 0) {
+        resultsDiv.innerHTML = '<p>No results found.</p>'; // ヒットがない場合の処理
+      } else {
+        const maxResults = 10; // 表示する最大件数
+        const resultsToShow = results.slice(0, maxResults); // 最大件数までの結果を取得
 
-    // 埋め込みコードを表示
-    const embeddedProject = document.createElement('div');
-    embeddedProject.innerHTML = iframeCode;
-    resultsDiv.appendChild(embeddedProject);
-  } else {
-    // JSONデータをフェッチ
-    fetch('data.json')
-      .then(response => response.json())
-      .then(data => {
-        // クエリに一致する結果をフィルタリング
-        const results = data.filter(item =>
-          (item.title.toLowerCase().includes(query) || 
-          item.description.toLowerCase().includes(query)) && 
-          item.url !== '#NONE' && item.url !== 'NONE' // NONE や # の場合は結果に含めない
-        );
+        resultsToShow.forEach(result => {
+          const link = document.createElement('a');
+          link.href = result.url;
+          link.target = '_blank';
+          link.textContent = result.title;
 
-        if (results.length === 0) {
-          resultsDiv.innerHTML = '<p>No results found.</p>'; // ヒットがない場合の処理
-        } else {
-          const maxResults = 10; // 表示する最大件数
-          const resultsToShow = results.slice(0, maxResults); // 最大件数までの結果を取得
+          const description = document.createElement('p');
+          description.textContent = result.description;
 
-          resultsToShow.forEach(result => {
-            const link = document.createElement('a');
-            link.href = result.url;
-            link.target = '_blank';
-            link.textContent = result.title;
+          const div = document.createElement('div');
 
-            const description = document.createElement('p');
-            description.textContent = result.description;
-
-            const div = document.createElement('div');
-            div.appendChild(link);
-            div.appendChild(description);
-
-            resultsDiv.appendChild(div);
-          });
-
-          // 検索結果が10件を超える場合に「もっと見る」ボタンを追加
-          if (results.length > maxResults) {
-            const seeMore = document.createElement('button');
-            seeMore.textContent = 'See more results';
-            seeMore.addEventListener('click', () => {
-              // 「もっと見る」ボタンがクリックされた場合の処理
-              resultsDiv.innerHTML = ''; // 結果をリセット
-              results.forEach(result => {
-                const link = document.createElement('a');
-                link.href = result.url;
-                link.target = '_blank';
-                link.textContent = result.title;
-
-                const description = document.createElement('p');
-                description.textContent = result.description;
-
-                const div = document.createElement('div');
-                div.appendChild(link);
-                div.appendChild(description);
-
-                resultsDiv.appendChild(div);
-              });
-            });
-            resultsDiv.appendChild(seeMore); // ボタンを表示
+          // 画像URLがある場合、その画像を表示
+          if (result.image) {
+            const img = document.createElement('img');
+            img.src = result.image;
+            img.alt = result.title;
+            img.style.width = '150px'; // 画像のサイズ調整
+            img.style.height = '150px';
+            div.appendChild(img);
           }
+
+          div.appendChild(link);
+          div.appendChild(description);
+          resultsDiv.appendChild(div);
+        });
+
+        // 検索結果が10件を超える場合に「もっと見る」ボタンを追加
+        if (results.length > maxResults) {
+          const seeMore = document.createElement('button');
+          seeMore.textContent = 'See more results';
+          seeMore.addEventListener('click', () => {
+            // 「もっと見る」ボタンがクリックされた場合の処理
+            resultsDiv.innerHTML = ''; // 結果をリセット
+            results.forEach(result => {
+              const link = document.createElement('a');
+              link.href = result.url;
+              link.target = '_blank';
+              link.textContent = result.title;
+
+              const description = document.createElement('p');
+              description.textContent = result.description;
+
+              const div = document.createElement('div');
+
+              // 画像URLがある場合、その画像を表示
+              if (result.image) {
+                const img = document.createElement('img');
+                img.src = result.image;
+                img.alt = result.title;
+                img.style.width = '150px';
+                img.style.height = '150px';
+                div.appendChild(img);
+              }
+
+              div.appendChild(link);
+              div.appendChild(description);
+              resultsDiv.appendChild(div);
+            });
+          });
+          resultsDiv.appendChild(seeMore); // ボタンを表示
         }
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error); // エラー時の処理
-        resultsDiv.innerHTML = '<p>Error loading search data.</p>';
-      });
-  }
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error); // エラー時の処理
+      resultsDiv.innerHTML = '<p>Error loading search data.</p>';
+    });
 });
