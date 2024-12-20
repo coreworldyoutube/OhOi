@@ -44,3 +44,28 @@ body {
   max-height: 400px; /* 結果エリアの最大高さ */
   overflow-y: scroll; /* 縦のスクロールを可能に */
 }
+/* タブのデザイン */
+#tabs {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.tab {
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin: 0 10px;
+  border-radius: 5px;
+}
+
+.tab:hover {
+  background-color: #0056b3;
+}
+
+#results {
+  margin-top: 20px;
+}
+
