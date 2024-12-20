@@ -1,5 +1,5 @@
 document.getElementById('search-button').addEventListener('click', () => {
-  const query = document.getElementById('search-box').value.trim().toLowerCase(); // 入力クエリを取得
+  const query = document.getElementById('search-box').value.trim(); // 入力クエリを取得
   const resultsDiv = document.getElementById('results');
   resultsDiv.innerHTML = ''; // 検索結果をリセット
 
@@ -26,28 +26,16 @@ document.getElementById('search-button').addEventListener('click', () => {
         const resultsToShow = results.slice(0, maxResults); // 最大件数までの結果を取得
 
         resultsToShow.forEach(result => {
-          const div = document.createElement('div');
-
-          // スクラッチのプロジェクトURLを確認
-          if (result.url.includes("scratch.mit.edu")) {
-            const projectId = result.url.split('/').pop(); // URLからプロジェクトIDを抽出
-            const iframe = document.createElement('iframe');
-            iframe.src = `https://scratch.mit.edu/projects/${projectId}/embed`;
-            iframe.frameBorder = "0";
-            iframe.allowFullscreen = true;
-            iframe.width = "485";
-            iframe.height = "402";
-            div.appendChild(iframe);
-          } else {
-            const link = document.createElement('a');
-            link.href = result.url;
-            link.target = '_blank';
-            link.textContent = result.title;
-            div.appendChild(link);
-          }
+          const link = document.createElement('a');
+          link.href = result.url;
+          link.target = '_blank';
+          link.textContent = result.title;
 
           const description = document.createElement('p');
           description.textContent = result.description;
+
+          const div = document.createElement('div');
+          div.appendChild(link);
           div.appendChild(description);
 
           resultsDiv.appendChild(div);
@@ -61,26 +49,16 @@ document.getElementById('search-button').addEventListener('click', () => {
             // 「もっと見る」ボタンがクリックされた場合の処理
             resultsDiv.innerHTML = ''; // 結果をリセット
             results.forEach(result => {
-              const div = document.createElement('div');
-              if (result.url.includes("scratch.mit.edu")) {
-                const projectId = result.url.split('/').pop();
-                const iframe = document.createElement('iframe');
-                iframe.src = `https://scratch.mit.edu/projects/${projectId}/embed`;
-                iframe.frameBorder = "0";
-                iframe.allowFullscreen = true;
-                iframe.width = "485";
-                iframe.height = "402";
-                div.appendChild(iframe);
-              } else {
-                const link = document.createElement('a');
-                link.href = result.url;
-                link.target = '_blank';
-                link.textContent = result.title;
-                div.appendChild(link);
-              }
+              const link = document.createElement('a');
+              link.href = result.url;
+              link.target = '_blank';
+              link.textContent = result.title;
 
               const description = document.createElement('p');
               description.textContent = result.description;
+
+              const div = document.createElement('div');
+              div.appendChild(link);
               div.appendChild(description);
 
               resultsDiv.appendChild(div);
@@ -89,6 +67,20 @@ document.getElementById('search-button').addEventListener('click', () => {
           resultsDiv.appendChild(seeMore); // ボタンを表示
         }
       }
+
+      // 入力されたURLがスクラッチのプロジェクトURLかどうかチェック
+      const scratchUrlRegex = /https:\/\/scratch\.mit\.edu\/projects\/(\d+)/;
+      const match = query.match(scratchUrlRegex);
+      if (match) {
+        const projectId = match[1]; // プロジェクトIDを取得
+        const iframeCode = `<iframe src="https://scratch.mit.edu/projects/${projectId}/embed" width="485" height="402" frameborder="0" allowfullscreen></iframe>`;
+        
+        // 埋め込みコードを表示
+        const embeddedProject = document.createElement('div');
+        embeddedProject.innerHTML = iframeCode;
+        resultsDiv.appendChild(embeddedProject);
+      }
+
     })
     .catch(error => {
       console.error('Error fetching data:', error); // エラー時の処理
