@@ -1,90 +1,29 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>埋め込みコードジェネレーター</title>
-  <style>
-    iframe {
-      display: block;
-      margin-top: 20px;
-    }
-    pre {
-      background-color: #f4f4f4;
-      padding: 10px;
-      border: 1px solid #ccc;
-      white-space: pre-wrap;       /* 改行を保持 */
-      word-wrap: break-word;      /* 長いURLの折り返しを有効に */
-    }
-  </style>
+  <title>OhOi</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>埋め込みコードジェネレーター</h1>
+  <div class="container">
+    <h1>OhOi</h1>
+    <input type="text" id="search-box" placeholder="Search..." />
+    <button id="search-button">Search</button>
 
-  <!-- URL 入力フォーム -->
-  <input type="text" id="embed-url" placeholder="埋め込みたい URL を入力">
-  <button id="generate-embed">埋め込みコードを生成</button>
+    <!-- タブの作成 -->
+    <div id="tabs">
+      <!-- タブは必要に応じてここに追加 -->
+    </div>
 
-  <!-- 埋め込みコード表示部分 -->
-  <div id="embed-code-container"></div>
-
-  <script>
-    // 埋め込みコード生成機能
-    function generateEmbedCode(url) {
-      let embedCode = '';
-      
-      // YouTube の埋め込みコード生成
-      if (url.match(/https:\/\/www\.youtube\.com\/watch\?v=([^&]+)/)) {
-        const videoId = url.match(/https:\/\/www\.youtube\.com\/watch\?v=([^&]+)/)[1];
-        embedCode = `
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" 
-                  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-                  allowfullscreen></iframe>
-        `;
-      }
-
-      // Scratch プロジェクトの埋め込みコード生成
-      else if (url.match(/https:\/\/scratch\.mit\.edu\/projects\/(\d+)/)) {
-        const projectId = url.match(/https:\/\/scratch\.mit\.edu\/projects\/(\d+)/)[1];
-        embedCode = `
-        <iframe src="https://scratch.mit.edu/projects/${projectId}/embed" width="485" height="402" frameborder="0" 
-        scrolling="no" allowtransparency="true" allowfullscreen></iframe>
-        `;
-      }
-
-      // Vimeo の埋め込みコード生成
-      else if (url.match(/https:\/\/vimeo\.com\/(\d+)/)) {
-        const videoId = url.match(/https:\/\/vimeo\.com\/(\d+)/)[1];
-        embedCode = `
-          <iframe src="https://player.vimeo.com/video/${videoId}" width="640" height="360" frameborder="0" 
-                  allow="autoplay; fullscreen" allowfullscreen></iframe>
-        `;
-      }
-
-      return embedCode;
-    }
-
-    // 埋め込みコードを表示する関数
-    function showEmbedCode(embedCode) {
-      const embedContainer = document.getElementById('embed-code-container');
-      if (embedCode) {
-        embedContainer.innerHTML = `<p>以下の埋め込みコードをコピーしてウェブサイトに貼り付けてください:</p><pre>${embedCode}</pre>`;
-      } else {
-        embedContainer.innerHTML = "<p>無効なURLです。埋め込みコードを生成できませんでした。</p>";
-      }
-    }
-
-    // ボタンのクリックイベント
-    document.getElementById('generate-embed').addEventListener('click', () => {
-      const url = document.getElementById('embed-url').value.trim();
-      if (url) {
-        const embedCode = generateEmbedCode(url);
-        showEmbedCode(embedCode);
-      } else {
-        alert("URLを入力してください！");
-      }
-    });
-  </script>
-
+    <!-- 検索結果 -->
+    <div id="results"></div>
+    
+    <!-- 埋め込みコード表示部分 -->
+    <div id="embed-code-container"></div>
+  </div>
+  
+  <script src="script.js"></script>
 </body>
 </html>
