@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OhOi</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    iframe {
+      display: block;
+      margin-top: 20px;
+    }
+    #embed-code-container {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -19,11 +28,142 @@
 
     <!-- 検索結果 -->
     <div id="results"></div>
-    
+
     <!-- 埋め込みコード表示部分 -->
     <div id="embed-code-container"></div>
+
+    <!-- URL入力と埋め込み機能 -->
+    <h2>埋め込み動画のサンプル</h2>
+    <p>リンクを入力して、埋め込むプロジェクトを表示してください。</p>
+    
+    <label for="urlInput">URLを入力:</label>
+    <input type="text" id="urlInput" placeholder="ScratchプロジェクトのURLを入力">
+    <button onclick="embedLink()">埋め込む</button>
+    <div id="embedContainer"></div>
   </div>
-  
-  <script src="script.js"></script>
+
+  <script>
+    // 埋め込みコード生成機能
+    function embedLink() {
+      const url = document.getElementById('urlInput').value;
+      const embedContainer = document.getElementById('embedContainer');
+      
+      // URLが空でないかチェック
+      if (url.trim() !== "") {
+        // 入力されたURLがScratchプロジェクトのURLかをチェック
+        if (url.match(/^https:\/\/scratch\.mit\.edu\/projects\/\d+/)) {
+          // URLが末尾に「/」を含んでいる場合、それを取り除いて「/embed」を追加
+          let embedUrl = url.replace(/\/$/, '') + '/embed';
+          
+          // 新しいiframeを作成
+          const iframe = document.createElement('iframe');
+          iframe.src = embedUrl;
+          iframe.allowtransparency = true;
+          iframe.width = "485";
+          iframe.height = "402";
+          iframe.frameborder = "0";
+          iframe.scrolling = "no";
+          iframe.allowfullscreen = true;
+          
+          // 既存のiframeを削除して新しいiframeを追加
+          embedContainer.innerHTML = "";
+          embedContainer.appendChild(iframe);
+        } else {
+          alert("ScratchプロジェクトのURLを正しく入力してください。");
+        }
+      } else {
+        alert("URLを入力してください！");
+      }
+    }
+
+    // 検索機能の統合
+    document.getElementById('search-button').addEventListener('click', () => {
+      const query = document.getElementById('search-box').value.trim().toLowerCase(); // 入力クエリを取得
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = ''; // 検索結果をリセット
+
+      if (query === '') {
+        resultsDiv.innerHTML = '<p>検索クエリを入力してください。</p>'; // クエリが空の場合の処理
+        return;
+      }
+
+      // JSONデータをフェッチ
+      fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+          // クエリに一致する結果をフィルタリング
+          const results = data.filter(item =>
+            (item.title.toLowerCase().includes(query) || 
+            item.description.toLowerCase().includes(query)) && 
+            item.url !== '#NONE' && item.url !== 'NONE' // NONE や # の場合は結果に含めない
+          );
+
+          if (results.length === 0) {
+            resultsDiv.innerHTML = '<p>該当する結果はありません。</p>'; // ヒットがない場合の処理
+          } else {
+            results.forEach(result => {
+              const link = document.createElement('a');
+              link.href = result.url;
+              link.target = '_blank';
+              link.textContent = result.title;
+
+              const description = document.createElement('p');
+              description.textContent = result.description;
+
+              const div = document.createElement('div');
+              div.appendChild(link);
+              div.appendChild(description);
+
+              // 埋め込み可能な場合、埋め込みコードも生成
+              const embedCode = generateEmbedCode(result.url);
+              if (embedCode) {
+                div.innerHTML += `<p>以下の埋め込みコードを使って、ページに埋め込むことができます:</p><pre>${embedCode}</pre>`;
+              }
+
+              resultsDiv.appendChild(div);
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error); // エラー時の処理
+          resultsDiv.innerHTML = '<p>検索データの読み込み中にエラーが発生しました。</p>';
+        });
+    });
+
+    // 埋め込みコードを生成する関数
+    function generateEmbedCode(url) {
+      let embedCode = '';
+      
+      // YouTube の埋め込みコード生成
+      if (url.match(/https:\/\/www\.youtube\.com\/watch\?v=([^&]+)/)) {
+        const videoId = url.match(/https:\/\/www\.youtube\.com\/watch\?v=([^&]+)/)[1];
+        embedCode = `
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" 
+                  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen></iframe>
+        `;
+      }
+
+      // Scratch プロジェクトの埋め込みコード生成
+      else if (url.match(/https:\/\/scratch\.mit\.edu\/projects\/(\d+)/)) {
+        const projectId = url.match(/https:\/\/scratch\.mit\.edu\/projects\/(\d+)/)[1];
+        embedCode = `
+          <iframe src="https://scratch.mit.edu/projects/${projectId}/embed" width="485" height="402" frameborder="0" 
+                  scrolling="no" allowtransparency="true" allowfullscreen></iframe>
+        `;
+      }
+
+      // Vimeo の埋め込みコード生成
+      else if (url.match(/https:\/\/vimeo\.com\/(\d+)/)) {
+        const videoId = url.match(/https:\/\/vimeo\.com\/(\d+)/)[1];
+        embedCode = `
+          <iframe src="https://player.vimeo.com/video/${videoId}" width="640" height="360" frameborder="0" 
+                  allow="autoplay; fullscreen" allowfullscreen></iframe>
+        `;
+      }
+
+      return embedCode;
+    }
+  </script>
 </body>
 </html>
