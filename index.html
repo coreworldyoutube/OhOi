@@ -1,29 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OhOi</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        function hideElement() {
+            document.getElementById('hidden-element').style.display = 'none';
+        }
+    </script>
 </head>
 <body>
-  <div class="container">
-    <h1>OhOi</h1>
-    <input type="text" id="search-box" placeholder="Search..." />
-    <button id="search-button">Search</button>
 
-    <!-- タブの作成 -->
-    <div id="tabs">
-      <!-- タブは必要に応じてここに追加 -->
-    </div>
+<p>This is visible.</p>
+<p id="hidden-element">This is hidden initially but can be hidden by JavaScript.</p>
+<button onclick="hideElement()">Hide Text</button>
 
-    <!-- 検索結果 -->
-    <div id="results"></div>
-    
-    <!-- 埋め込みコード表示部分 -->
-    <div id="embed-code-container"></div>
-  </div>
-  
-  <script src="script.js"></script>
 </body>
 </html>
