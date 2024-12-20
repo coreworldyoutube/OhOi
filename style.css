@@ -41,4 +41,6 @@ body {
 #results {
   margin-top: 20px;
   text-align: left;
+  max-height: 400px; /* 結果エリアの最大高さ */
+  overflow-y: scroll; /* 縦のスクロールを可能に */
 }
