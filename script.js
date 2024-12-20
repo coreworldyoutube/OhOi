@@ -24,14 +24,9 @@
 
   <script>
     // 埋め込みコード生成機能
-    document.getElementById('generate-embed').addEventListener('click', () => {
-      const url = document.getElementById('embed-url').value.trim();
-
-      const embedContainer = document.getElementById('embed-code-container');
-      embedContainer.innerHTML = ''; // 結果をリセット
-
+    function generateEmbedCode(url) {
       let embedCode = '';
-
+      
       // YouTube の埋め込みコード生成
       if (url.match(/https:\/\/www\.youtube\.com\/watch\?v=([^&]+)/)) {
         const videoId = url.match(/https:\/\/www\.youtube\.com\/watch\?v=([^&]+)/)[1];
@@ -60,16 +55,14 @@
         `;
       }
 
-      // URL が不正な場合
-      if (embedCode) {
-        embedContainer.innerHTML = `
-          <p>以下の埋め込みコードをコピーしてウェブサイトに貼り付けてください:</p>
-          <pre>${embedCode}</pre>
-        `;
-      } else {
-        embedContainer.innerHTML = '<p>無効な URL です。YouTube、Scratch、Vimeo の URL を入力してください。</p>';
-      }
-    });
+      return embedCode;
+    }
+
+    // 埋め込みコードを表示する関数
+    function showEmbedCode(embedCode) {
+      const embedContainer = document.getElementById('embed-code-container');
+      embedContainer.innerHTML = `<p>以下の埋め込みコードをコピーしてウェブサイトに貼り付けてください:</p><pre>${embedCode}</pre>`;
+    }
 
     // 検索機能の統合
     document.getElementById('search-button').addEventListener('click', () => {
@@ -78,7 +71,7 @@
       resultsDiv.innerHTML = ''; // 検索結果をリセット
 
       if (query === '') {
-        resultsDiv.innerHTML = '<p>Please enter a search query.</p>'; // クエリが空の場合の処理
+        resultsDiv.innerHTML = '<p>検索クエリを入力してください。</p>'; // クエリが空の場合の処理
         return;
       }
 
@@ -94,12 +87,9 @@
           );
 
           if (results.length === 0) {
-            resultsDiv.innerHTML = '<p>No results found.</p>'; // ヒットがない場合の処理
+            resultsDiv.innerHTML = '<p>該当する結果はありません。</p>'; // ヒットがない場合の処理
           } else {
-            const maxResults = 10; // 表示する最大件数
-            const resultsToShow = results.slice(0, maxResults); // 最大件数までの結果を取得
-
-            resultsToShow.forEach(result => {
+            results.forEach(result => {
               const link = document.createElement('a');
               link.href = result.url;
               link.target = '_blank';
@@ -112,39 +102,19 @@
               div.appendChild(link);
               div.appendChild(description);
 
+              // 埋め込み可能な場合、埋め込みコードも生成
+              const embedCode = generateEmbedCode(result.url);
+              if (embedCode) {
+                div.innerHTML += `<p>以下の埋め込みコードを使って、ページに埋め込むことができます:</p><pre>${embedCode}</pre>`;
+              }
+
               resultsDiv.appendChild(div);
             });
-
-            // 検索結果が10件を超える場合に「もっと見る」ボタンを追加
-            if (results.length > maxResults) {
-              const seeMore = document.createElement('button');
-              seeMore.textContent = 'See more results';
-              seeMore.addEventListener('click', () => {
-                // 「もっと見る」ボタンがクリックされた場合の処理
-                resultsDiv.innerHTML = ''; // 結果をリセット
-                results.forEach(result => {
-                  const link = document.createElement('a');
-                  link.href = result.url;
-                  link.target = '_blank';
-                  link.textContent = result.title;
-
-                  const description = document.createElement('p');
-                  description.textContent = result.description;
-
-                  const div = document.createElement('div');
-                  div.appendChild(link);
-                  div.appendChild(description);
-
-                  resultsDiv.appendChild(div);
-                });
-              });
-              resultsDiv.appendChild(seeMore); // ボタンを表示
-            }
           }
         })
         .catch(error => {
           console.error('Error fetching data:', error); // エラー時の処理
-          resultsDiv.innerHTML = '<p>Error loading search data.</p>';
+          resultsDiv.innerHTML = '<p>検索データの読み込み中にエラーが発生しました。</p>';
         });
     });
   </script>
