@@ -14,8 +14,9 @@ document.getElementById('search-button').addEventListener('click', () => {
     .then(data => {
       // クエリに一致する結果をフィルタリング
       const results = data.filter(item =>
-        item.title.toLowerCase().includes(query) || 
-        item.description.toLowerCase().includes(query)
+        (item.title.toLowerCase().includes(query) || 
+        item.description.toLowerCase().includes(query)) && 
+        item.url !== '#' && item.url !== 'NONE' // NONE や # の場合は結果に含めない
       );
 
       if (results.length === 0) {
@@ -25,10 +26,6 @@ document.getElementById('search-button').addEventListener('click', () => {
         const resultsToShow = results.slice(0, maxResults); // 最大件数までの結果を取得
 
         resultsToShow.forEach(result => {
-          if (result.url === '#' || result.url === '' || !result.url) {
-            return; // 無効なリンクをスキップ
-          }
-
           const link = document.createElement('a');
           link.href = result.url;
           link.target = '_blank';
