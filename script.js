@@ -1,10 +1,10 @@
 document.getElementById('search-button').addEventListener('click', () => {
-  const query = document.getElementById('search-box').value.trim().toLowerCase();
+  const query = document.getElementById('search-box').value.trim().toLowerCase(); // 入力クエリを取得
   const resultsDiv = document.getElementById('results');
   resultsDiv.innerHTML = ''; // 検索結果をリセット
 
   if (query === '') {
-    resultsDiv.innerHTML = '<p>Please enter a search query.</p>';
+    resultsDiv.innerHTML = '<p>Please enter a search query.</p>'; // クエリが空の場合の処理
     return;
   }
 
@@ -19,7 +19,7 @@ document.getElementById('search-button').addEventListener('click', () => {
       );
 
       if (results.length === 0) {
-        resultsDiv.innerHTML = '<p>No results found.</p>';
+        resultsDiv.innerHTML = '<p>No results found.</p>'; // ヒットがない場合の処理
       } else {
         const maxResults = 10; // 表示する最大件数
         const resultsToShow = results.slice(0, maxResults); // 最大件数までの結果を取得
@@ -49,6 +49,7 @@ document.getElementById('search-button').addEventListener('click', () => {
           const seeMore = document.createElement('button');
           seeMore.textContent = 'See more results';
           seeMore.addEventListener('click', () => {
+            // 「もっと見る」ボタンがクリックされた場合の処理
             resultsDiv.innerHTML = ''; // 結果をリセット
             results.forEach(result => {
               const link = document.createElement('a');
@@ -71,7 +72,7 @@ document.getElementById('search-button').addEventListener('click', () => {
       }
     })
     .catch(error => {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching data:', error); // エラー時の処理
       resultsDiv.innerHTML = '<p>Error loading search data.</p>';
     });
 });
