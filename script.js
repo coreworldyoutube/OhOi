@@ -22,12 +22,10 @@ document.getElementById('search-button').addEventListener('click', () => {
       if (results.length === 0) {
         resultsDiv.innerHTML = '<p>No results found.</p>'; // ヒットがない場合の処理
       } else {
-        results.forEach(result => {
-          // URLが無効な場合はスキップする
-          if (result.url === '#' || result.url === '' || !result.url) {
-            return; // 無効なリンクを無視
-          }
+        const maxResults = 10; // 表示する最大件数
+        const resultsToShow = results.slice(0, maxResults); // 最大件数までの結果を取得
 
+        resultsToShow.forEach(result => {
           // リンク要素を作成
           const link = document.createElement('a');
           link.href = result.url;
@@ -46,6 +44,30 @@ document.getElementById('search-button').addEventListener('click', () => {
           // 結果を表示エリアに追加
           resultsDiv.appendChild(div);
         });
+
+        if (results.length > maxResults) {
+          const seeMore = document.createElement('button');
+          seeMore.textContent = 'See more results';
+          seeMore.addEventListener('click', () => {
+            resultsDiv.innerHTML = ''; // 既存の結果をリセット
+            results.forEach(result => {
+              const link = document.createElement('a');
+              link.href = result.url;
+              link.target = '_blank';
+              link.textContent = result.title;
+
+              const description = document.createElement('p');
+              description.textContent = result.description;
+
+              const div = document.createElement('div');
+              div.appendChild(link);
+              div.appendChild(description);
+
+              resultsDiv.appendChild(div);
+            });
+          });
+          resultsDiv.appendChild(seeMore); // "See more" ボタンを追加
+        }
       }
     })
     .catch(error => {
