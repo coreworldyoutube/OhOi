@@ -65,3 +65,9 @@ body {
   background-color: #0056b3;
 }
 
+.logo {
+  height: 50px; /* ロゴの高さ調整 */
+  display: block;
+  margin: 0 auto 20px; /* 中央揃え＆下に余白 */
+}
+
