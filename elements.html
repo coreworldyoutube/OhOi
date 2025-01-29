@@ -338,6 +338,17 @@
         <!-- 追加の元素も同様に続けてください -->
     </tbody>
 </table>
-
+    
+<script>
+    function toggleDetail(id) {
+        var detail = document.getElementById(id);
+        if (detail.style.display === "none") {
+            detail.style.display = "block"; // 詳細情報を表示
+        } else {
+            detail.style.display = "none"; // 詳細情報を非表示
+        }
+    }
+</script>
+    
 </body>
 </html>
