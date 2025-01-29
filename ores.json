@@ -1,0 +1,23 @@
+[
+    {
+        "name": "鉄鉱石",
+        "chemicalFormula": "Fe2O3",
+        "uses": "鉄を取り出すための鉱石です。",
+        "englishName": "Iron Ore",
+        "description": "鉄鉱石は鉄を含む鉱物で、主に鉄鋼を作るために使用されます。"
+    },
+    {
+        "name": "銅鉱石",
+        "chemicalFormula": "CuFeS2",
+        "uses": "銅を取り出すための鉱石です。",
+        "englishName": "Copper Ore",
+        "description": "銅鉱石は銅を抽出するための重要な鉱石で、銅製品に広く利用されています。"
+    },
+    {
+        "name": "アルミニウム鉱石",
+        "chemicalFormula": "Al2O3",
+        "uses": "アルミニウムを取り出すための鉱石です。",
+        "englishName": "Aluminum Ore",
+        "description": "アルミニウム鉱石は、軽くて強い金属であるアルミニウムを製造するための原料です。"
+    }
+]
