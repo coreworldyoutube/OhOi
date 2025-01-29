@@ -25,43 +25,43 @@
     },
     {
         "name": "ホウ素",
-        "symbol": "Li",
+        "symbol": "B",
         "atomicNumber": 5,
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "炭素",
-        "symbol": "Li",
+        "symbol": "C",
         "atomicNumber": 6,
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "窒素",
-        "symbol": "Li",
+        "symbol": "N",
         "atomicNumber": 7,
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "酸素",
-        "symbol": "Li",
+        "symbol": "O",
         "atomicNumber": 8,
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },  
     {
         "name": "フッ素",
-        "symbol": "Li",
+        "symbol": "F",
         "atomicNumber": 9,
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "ネオン",
-        "symbol": "Li",
+        "symbol": "Ne",
         "atomicNumber": 10,
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "ナトリウム",
-        "symbol": "Li",
+        "symbol": "Na",
         "atomicNumber": 11,
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
@@ -178,5 +178,5 @@
         "symbol": "Cu",
         "atomicNumber": 29,
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
-    },
+    }
 ]
