@@ -66,8 +66,8 @@ body {
 }
 
 .logo {
-  height: 150px; /* ロゴの高さ調整 */
+  width: 200px;
+  height: auto; 
   display: block;
-  margin: 0 auto 20px; /* 中央揃え＆下に余白 */
+  margin: 0 auto;
 }
-
