@@ -33,7 +33,7 @@
             border: 1px solid #ddd;
             word-wrap: break-word;
             white-space: normal;
-            text-align: right;
+            text-align: left;
         }
         .show-button {
             cursor: pointer;
@@ -93,7 +93,7 @@ function populateList(elements) {
         const detailRow = document.createElement('tr');
         detailRow.innerHTML = `
             <td colspan="4">
-                <div id="detail${index}" class="detail" style="text-align: right;">
+                <div id="detail${index}" class="detail" style="text-align: left;">
                     ${element.description}
                 </div>
             </td>
