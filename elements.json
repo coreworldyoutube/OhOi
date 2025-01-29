@@ -3,180 +3,210 @@
         "name": "水素",
         "symbol": "H",
         "atomicNumber": 1,
+        "englishName": "Hydrogen",
         "description": "水素は、宇宙で最も豊富な元素であり、主に水や有機化合物に含まれています。水素は非常に軽く、気体状態では無色・無臭です。"
     },
     {
         "name": "ヘリウム",
         "symbol": "He",
         "atomicNumber": 2,
+        "englishName": "Hydrogen",
         "description": "ヘリウムは、最も軽い貴ガスで、低温で液化し、冷却剤などに利用されます。"
     },
     {
         "name": "リチウム",
         "symbol": "Li",
         "atomicNumber": 3,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "ベリリウム",
         "symbol": "Be",
         "atomicNumber": "4",
+        "englishName": "Hydrogen",
         "description": "ポケモンとして存在します。アヘアヘ"
     },
     {
         "name": "ホウ素",
         "symbol": "B",
         "atomicNumber": 5,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "炭素",
         "symbol": "C",
         "atomicNumber": 6,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "窒素",
         "symbol": "N",
         "atomicNumber": 7,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "酸素",
         "symbol": "O",
         "atomicNumber": 8,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },  
     {
         "name": "フッ素",
         "symbol": "F",
         "atomicNumber": 9,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "ネオン",
         "symbol": "Ne",
         "atomicNumber": 10,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "ナトリウム",
         "symbol": "Na",
         "atomicNumber": 11,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "アルミニウム",
         "symbol": "Li",
         "atomicNumber": 12,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },  
     {
         "name": "ケイ素",
         "symbol": "Li",
         "atomicNumber": 13,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "リン",
         "symbol": "Li",
         "atomicNumber": 14,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     }, 
     {
         "name": "硫黄",
         "symbol": "Li",
         "atomicNumber": 15,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },  
     {
         "name": "塩素",
         "symbol": "Li",
         "atomicNumber": 16,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     }, 
     {
         "name": "アルゴン",
         "symbol": "Li",
         "atomicNumber": 17,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     }, 
     {
         "name": "カリウム",
         "symbol": "Li",
         "atomicNumber": 18,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },  
     {
         "name": "カルシウム",
         "symbol": "Li",
         "atomicNumber": 19,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },  
     {
         "name": "スカンジウム",
         "symbol": "Li",
         "atomicNumber": 19,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "リチウム",
         "symbol": "Li",
         "atomicNumber": 20,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     }, 
     {
         "name": "リチウム",
         "symbol": "Li",
         "atomicNumber": 21,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     }, 
     {
         "name": "リチウム",
         "symbol": "Li",
         "atomicNumber": 22,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "リチウム",
         "symbol": "Li",
         "atomicNumber": 23,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "リチウム",
         "symbol": "Li",
         "atomicNumber": 24,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "リチウム",
         "symbol": "Li",
         "atomicNumber": 25,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "鉄",
         "symbol": "Fe",
         "atomicNumber": 26,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },
     {
         "name": "コバルト",
         "symbol": "Li",
         "atomicNumber": 27,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },    
     {
         "name": "ニッケル",
         "symbol": "Ni",
         "atomicNumber": 28,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     },    
     {
         "name": "銅",
         "symbol": "Cu",
         "atomicNumber": 29,
+        "englishName": "Hydrogen",
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
     }
 ]
