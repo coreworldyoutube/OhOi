@@ -16,5 +16,11 @@
         "symbol": "Li",
         "atomicNumber": 3,
         "description": "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。"
+    },
+    {
+        "name": "ベリリウム",
+        "symbol": "Be",
+        "atomicNumber": "4",
+        "description": "ポケモンとして存在します。アヘアヘ“
     }
 ]
