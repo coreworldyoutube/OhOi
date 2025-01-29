@@ -28,6 +28,9 @@
         }
         .detail {
             display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
         }
     </style>
 </head>
@@ -45,61 +48,60 @@
             <th>説明</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td>水素</td>
-            <td>H</td>
-            <td>1</td>
-            <td><span class="show-button" onclick="toggleDetail('detailH')">詳細</span></td>
-        </tr>
-        <tr>
-            <td colspan="4">
-                <div id="detailH" class="detail">
-                    水素は、宇宙で最も豊富な元素であり、主に水や有機化合物に含まれています。水素は非常に軽く、気体状態では無色・無臭です。
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>水素</td>
-            <td>H</td>
-            <td>1</td>
-            <td><span class="show-button" onclick="toggleDetail('detailH')">詳細</span></td>
-        </tr>
-        <tr>
-            <td colspan="4">
-                <div id="detailH" class="detail">
-                    水素は、軽く、気体状態では無色・無臭です。
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>水素</td>
-            <td>H</td>
-            <td>1</td>
-            <td><span class="show-button" onclick="toggleDetail('detailH')">詳細</span></td>
-        </tr>
-        <tr>
-            <td colspan="4">
-                <div id="detailH" class="detail">
-                    水素は、宇宙で最も豊富な元素であり、主に水や有機化合物に含まれています。水素は非常に軽く、気体状態では無色・無臭です。
-                </div>
-            </td>
-        </tr>
-        
-        <!-- 追加の元素も同様に続けてください -->
+    <tbody id="elementList">
+        <!-- JavaScriptでここにリストが追加されます -->
     </tbody>
 </table>
-    
+
 <script>
-    function toggleDetail(id) {
-        var detail = document.getElementById(id);
-        if (detail.style.display === "none") {
-            detail.style.display = "block"; // 詳細情報を表示
-        } else {
-            detail.style.display = "none"; // 詳細情報を非表示
-        }
+// データを配列で管理
+const elements = [
+    { name: "水素", symbol: "H", atomicNumber: 1, description: "水素は、宇宙で最も豊富な元素であり、主に水や有機化合物に含まれています。水素は非常に軽く、気体状態では無色・無臭です。" },
+    { name: "ヘリウム", symbol: "He", atomicNumber: 2, description: "ヘリウムは、最も軽い貴ガスで、低温で液化し、冷却剤などに利用されます。" },
+    { name: "リチウム", symbol: "Li", atomicNumber: 3, description: "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。" }
+    // 他の元素も同様に追加できます
+];
+
+// リストを動的に作成する関数
+function populateList() {
+    const list = document.getElementById('elementList');
+    elements.forEach((element, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${element.name}</td>
+            <td>${element.symbol}</td>
+            <td>${element.atomicNumber}</td>
+            <td><span class="show-button" onclick="toggleDetail('detail${index}')">詳細</span></td>
+        `;
+        
+        // 詳細表示用の行を作成
+        const detailRow = document.createElement('tr');
+        detailRow.innerHTML = `
+            <td colspan="4">
+                <div id="detail${index}" class="detail">
+                    ${element.description}
+                </div>
+            </td>
+        `;
+
+        list.appendChild(row);
+        list.appendChild(detailRow);
+    });
+}
+
+// 詳細表示/非表示を切り替える関数
+function toggleDetail(id) {
+    const detailDiv = document.getElementById(id);
+    if (detailDiv.style.display === 'none' || detailDiv.style.display === '') {
+        detailDiv.style.display = 'block';
+    } else {
+        detailDiv.style.display = 'none';
     }
+}
+
+// ページ読み込み時にリストを挿入
+populateList();
 </script>
-    
+
 </body>
 </html>
