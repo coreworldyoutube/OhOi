@@ -34,6 +34,14 @@
             word-wrap: break-word;
             white-space: pre-wrap;
         }
+        .show-button {
+            cursor: pointer;
+            color: #007bff;
+            text-decoration: underline;
+        }
+        .show-button:hover {
+            color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -56,16 +64,18 @@
 </table>
 
 <script>
-// データを配列で管理
-const elements = [
-    { name: "水素", symbol: "H", atomicNumber: 1, description: "水素は、宇宙で最も豊富な元素であり、主に水や有機化合物に含まれています。水素は非常に軽く、気体状態では無色・無臭です。" },
-    { name: "ヘリウム", symbol: "He", atomicNumber: 2, description: "ヘリウムは、最も軽い貴ガスで、低温で液化し、冷却剤などに利用されます。" },
-    { name: "リチウム", symbol: "Li", atomicNumber: 3, description: "リチウムは、軽金属で、電池などのエネルギー貯蔵システムに使用されます。" }
-    
-];
+// JSONファイルからデータを読み込む関数
+function loadElementData() {
+    fetch('elements.json')
+        .then(response => response.json())
+        .then(elements => {
+            populateList(elements);  // JSONデータをリストに追加
+        })
+        .catch(error => console.error("データの読み込みに失敗しました:", error));
+}
 
 // リストを動的に作成する関数
-function populateList() {
+function populateList(elements) {
     const list = document.getElementById('elementList');
     elements.forEach((element, index) => {
         const row = document.createElement('tr');
@@ -101,8 +111,8 @@ function toggleDetail(id) {
     }
 }
 
-// ページ読み込み時にリストを挿入
-populateList();
+// ページ読み込み時にデータを読み込み
+loadElementData();
 </script>
 
 </body>
