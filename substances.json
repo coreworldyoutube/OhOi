@@ -1,0 +1,17 @@
+[
+    {
+        "name": "磁鉄鉱",
+        "formula": "Fe3O4",
+        "elements": "鉄, 酸素",
+        "description": "磁鉄鉱は磁性を持つ鉱石で、鉄鉱石の一つです。",
+        "englishName": "Magnetite"
+    },
+    {
+        "name": "蒼鉛",
+        "formula": "PbS",
+        "elements": "鉛, 硫黄",
+        "description": "蒼鉛は鉛と硫黄からなる鉱物で、鉛鉱石の一つです。",
+        "englishName": "Galena"
+    }
+    // 他の物質データを追加
+]
