@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鉱石系一覧</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .detail {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        .show-button {
+            cursor: pointer;
+            color: #007bff;
+            text-decoration: underline;
+        }
+        .show-button:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h1>鉱石系一覧</h1>
+<p>以下は、いくつかの鉱石とその情報の一覧です。</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>鉱石名</th>
+            <th>化学式</th>
+            <th>用途</th>
+            <th>英語名</th>
+            <th>詳細</th>
+        </tr>
+    </thead>
+    <tbody id="oreList">
+        <!-- JavaScriptでここにリストが追加されます -->
+    </tbody>
+</table>
+
+<script>
+// JSONファイルからデータを読み込む関数
+function loadOreData() {
+    fetch('ores.json')  // ores.json ファイルを取得
+        .then(response => response.json())
+        .then(ores => {
+            populateList(ores);  // JSONデータをリストに追加
+        })
+        .catch(error => console.error("データの読み込みに失敗しました:", error));
+}
+
+// リストを動的に作成する関数
+function populateList(ores) {
+    const list = document.getElementById('oreList');
+    ores.forEach((ore, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${ore.name}</td>
+            <td>${ore.chemicalFormula}</td>
+            <td>${ore.uses}</td>
+            <td>${ore.englishName}</td>
+            <td><span class="show-button" onclick="toggleDetail('detail${index}')">詳細</span></td>
+        `;
+        
+        // 詳細表示用の行を作成
+        const detailRow = document.createElement('tr');
+        detailRow.innerHTML = `
+            <td colspan="5">
+                <div id="detail${index}" class="detail">
+                    ${ore.description}
+                </div>
+            </td>
+        `;
+
+        list.appendChild(row);
+        list.appendChild(detailRow);
+    });
+}
+
+// 詳細表示/非表示を切り替える関数
+function toggleDetail(id) {
+    const detailDiv = document.getElementById(id);
+    if (detailDiv.style.display === 'none' || detailDiv.style.display === '') {
+        detailDiv.style.display = 'block';
+    } else {
+        detailDiv.style.display = 'none';
+    }
+}
+
+// ページ読み込み時にデータを読み込み
+loadOreData();
+</script>
+
+</body>
+</html>
